@@ -1,0 +1,18 @@
+import os
+import subprocess
+import requests
+
+# Step 1: Fetch Clone URLs
+response = requests.get('https://api.github.com/orgs/python-elective-kea/repos')
+repos = response.json()
+clone_urls = [repo['clone_url'] for repo in repos]
+
+# Step 2: Create a Folder
+folder_name = "cloned_repos"
+parent_dir = "./"  # Adjust this path as necessary
+path = os.path.join(parent_dir, folder_name)
+os.makedirs(path, exist_ok=True)
+
+# Step 3: Clone Repositories
+for url in clone_urls:
+    subprocess.run(["git", "clone", url], cwd=path)

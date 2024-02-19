@@ -23,3 +23,4 @@ animals = cursor.fetchall()
 conn.close()
 
 print(animals)
+
